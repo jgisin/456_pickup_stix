@@ -1,0 +1,13 @@
+<%= link_to "Arist Page", artist_path(@song.artist) %>
+
+<%= form_for @playlist_selection, do |f| %>
+
+<%= f.select :playlist_id, Playlist.all.collect {|c| [c.name, c.id]} %>
+<%= f.hidden_field :song_id, value: @song.id %>
+
+<%= f.submit "Add to playlist" %>
+<% if bookmarked?(@song) %>
+  <%= link_to "Bookmark", song_bookmarks_path(:song_id => @song.id), method: :post %>
+<% else %>
+  <%= link_to "Bookmark", song_bookmark_path(:song_id => @song.id), method: :delete %>
+<% end %>

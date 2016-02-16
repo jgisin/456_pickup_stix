@@ -15,7 +15,23 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-          
+
+<% flash.each do |type, message| %>
+  <div class="alert alert-success">
+    <div>
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong><%= type.titleize %>! <%= message %></strong>
+    </div>
+  </div>
+<% end %>
+
+<nav>
+  <%= link_to "Home", root_path %> |
+  <%= link_to "Artists", artists_path %> |
+  <%= link_to "Users", users_path %> |
+  <%= link_to "Profile", user_path(current_user) %>
+</nav>
+
     <%= yield %>
 
     <!-- Bootstrap JavaScript -->

@@ -1,4 +1,24 @@
 Rails.application.routes.draw do
+
+
+  resources :sessions
+  resources :users
+  resources :playlists do
+    resources :bookmarks, :defaults => {:bookmarkable => 'Playlist'}, :only => [:create, :destroy]
+  end
+  resources :followings
+  resources :playlist_selections
+  resources :artists
+  resources :songs do
+    resources :bookmarks, :defaults => {:bookmarkable => 'Song'}, :only => [:create, :destroy]
+  end
+
+  root 'sessions#new'
+  get "login" => "sessions#new"
+
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
